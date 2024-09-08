@@ -7,6 +7,6 @@ const bank_data = require("../controllers/bank_data.js");
 router.post("/add", bank_data.addBankData);
 router.get("/:id", bank_data.getBankData);
 router.put("/update/:id", bank_data.updateBankData);
-router.post("/delete/:id_bank/:id_user", bank_data.deleteBankData);
+router.delete("/delete/:id_bank/:id_user", bank_data.deleteBankData);
 
 module.exports = router;
