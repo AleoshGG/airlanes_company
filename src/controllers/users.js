@@ -1,6 +1,6 @@
 // Import dependencies
 require("dotenv").config();
-const db = require("../config/connection");
+const db = require("../config/connection.js");
 
 // TODO: Develop controllers
 
