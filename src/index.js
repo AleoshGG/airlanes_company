@@ -22,6 +22,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Use routes
+app.use("/users", usersRouter);
 app.use("/payments", paymentsRouter);
 app.use("/places", placesRouter);
 app.use("/planes", planesRouter);
