@@ -33,9 +33,10 @@ exports.getBankData = (req, res) => {
 
 //Update bank_data
 exports.updateBankData = (req, res) => {
+    const bank_data = req.body;
     const id_bank_data = req.params.id_bank_data;
 
-    db.query("UPDATE bank_data SET ? WHERE id_bank_data = ?", id_bank_data, (err, result) => {
+    db.query("UPDATE bank_data SET ? WHERE id_bank_data = ?", [bank_data, id_bank_data], (err, result) => {
         if(err) {
             res.status(500).send("Error to update bank-data");
             console.log(err);
