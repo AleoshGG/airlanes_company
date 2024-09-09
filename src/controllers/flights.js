@@ -4,7 +4,7 @@ const db = require("../config/connection");
 
 // TODO: Develop controllers
 
-// get all passengers
+// get all fligths
 exports.getFlights = (req, res) => {
     console.log("Request received for fetching flights");
   
@@ -18,7 +18,7 @@ exports.getFlights = (req, res) => {
     });
   };
 
-  //get a simple passenger with ID
+  //get a simple flight with ID
   exports.getFlightsById = (req, res) => {
     const id = req.params.id;
     console.log(`Fetching flights with ID: ${id}`);
@@ -33,56 +33,56 @@ exports.getFlights = (req, res) => {
     });
   };
 
-  // Create a new passenger
+  // Create a new flight
 exports.createFlight = (req, res) => {
-    const { first_name, last_name, email, phone_number,birthdate } = req.body;
-    console.log("Creating a new passenger");
+    const { id_flight, date, price, origin, destination } = req.body;
+    console.log("Creating a new fligth");
   
     db.query(
-      "INSERT INTO passenger (first_name, last_name, email, phone_number,birthdate, id_passenger ) VALUES (?, ?, ?, ?, ?, ?)",
-      [first_name, last_name, email, phone_number,birthdate ],
+      "INSERT INTO flights (id_flight, date, price, origin, destination ) VALUES (?, ?, ?, ?, ?)",
+      [id_flight, date, price, origin, destination],
       (err, result) => {
         if (err) {
-          console.log("Error creating new passenger: ", err);
+          console.log("Error creating new flight: ", err);
           return res.status(500).json({ error: "Database query error" });
         }
-        console.log("Passenger created successfully", result);
+        console.log("Flight created successfully", result);
         res.json({ id: result.insertId });
       }
     );
   };
 
-  // Update a payment by ID
-exports.updatePassenger = (req, res) => {
+  // Update a flight by ID
+exports.updateFlights = (req, res) => {
     const id = req.params.id;
-    const { first_name, last_name, email, phone_number,birthdate, id_passenger} = req.body;
-    console.log(`Updating passenger with ID: ${id}`);
+    const { id_flight, date, price, origin, destination} = req.body;
+    console.log(`Updating flights with ID: ${id}`);
   
     db.query(
-      "UPDATE passengers SET first_name= ?, last_name = ?, email = ?, phone_number = ?, birthdate = ? WHERE id_passenger = ?",
-      [first_name, last_name, email, phone_number,birthdate, id_passenger],
+      "UPDATE flights SET date= ?, price = ?, origin = ?, destination = ? WHERE id_flight = ?",
+      [id_flight, date, price, origin, destination],
       (err, result) => {
         if (err) {
           console.log("Error updating passengers: ", err);
           return res.status(500).json({ error: "Database query error" });
         }
-        console.log("Passenger updated successfully", result);
-        res.json({ message: "Passenger updated" });
+        console.log("Flight updated successfully", result);
+        res.json({ message: "Flights updated" });
       }
     );
   };
 
-  // Delete a place by ID
-exports.deletePassengers = (req, res) => {
+  // Delete a flight by ID
+exports.deleteFlights = (req, res) => {
     const id = req.params.id;
-    console.log(`Deleting Passenger with ID: ${id}`);
+    console.log(`Deleting Flights with ID: ${id}`);
   
-    db.query("DELETE FROM passengers WHERE id_passengers = ?", [id], (err, result) => {
+    db.query("DELETE FROM flights WHERE id_flights = ?", [id], (err, result) => {
       if (err) {
-        console.log("Error deleting Passenger: ", err);
+        console.log("Error deleting Flight: ", err);
         return res.status(500).json({ error: "Database query error" });
       }
-      console.log("Passengers deleted successfully", result);
-      res.json({ message: "Passengers deleted" });
+      console.log("Flight deleted successfully", result);
+      res.json({ message: "Flight deleted" });
     });
   };
