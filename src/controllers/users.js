@@ -50,7 +50,7 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
     const id_user = req.params.id;
 
-    db.query("DELETE FORM users WHERE id_users = ?", id_user, (err, result) => {
+    db.query("DELETE FROM users WHERE id_user = ?", id_user, (err, result) => {
         if(err) {
             res.status(500).send("Error to delete user");
             console.log(err);

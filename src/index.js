@@ -7,7 +7,6 @@ const app = express();
 const port = process.env.PORT;
 
 // Import routes
-const usersRouter = require("./routes/users");
 const paymentsRouter = require("./routes/payments");
 const placesRouter = require("./routes/places");
 const planesRouter = require("./routes/planes");
