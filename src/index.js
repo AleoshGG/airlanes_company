@@ -7,9 +7,10 @@ const app = express();
 const port = process.env.PORT;
 
 // Import routes
-const usersRouter = require("./routes/users");
 const reservationsRouter = require("./routes/reservations.js");
 const haveRouter = require("./routes/have.js");
+const usersRouter = require("./routes/users.js");
+const bank_data = require("./routes/bank_data.js");
 
 // Cors configuration
 app.use(cors());
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use("/users", usersRouter);
 app.use("/reservations", reservationsRouter);
 app.use("/have", haveRouter);
+app.use("/bank_data", bank_data);
 
 // Start the server
 app.listen(port, () => {
