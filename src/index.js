@@ -7,7 +7,8 @@ const app = express();
 const port = process.env.PORT;
 
 // Import routes
-const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users.js");
+const bank_data = require("./routes/bank_data.js");
 
 // Cors configuration
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use("/users", usersRouter);
+app.use("/bank_data", bank_data);
 
 // Start the server
 app.listen(port, () => {
