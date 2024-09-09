@@ -8,6 +8,9 @@ const port = process.env.PORT;
 
 // Import routes
 const usersRouter = require("./routes/users");
+const paymentsRouter = require("./routes/payments");
+const placesRouter = require("./routes/places");
+const planesRouter = require("./routes/planes");
 
 // Cors configuration
 app.use(cors());
@@ -17,6 +20,9 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use("/users", usersRouter);
+app.use("/payments", paymentsRouter);
+app.use("/places", placesRouter);
+app.use("/planes", planesRouter);
 
 // Start the server
 app.listen(port, () => {
