@@ -18,7 +18,6 @@ db.connect((err) => {
   }
   console.log("Connection is Successful");
 });
-console.log("Hola kami tueni");
 
 
 module.exports = db;
