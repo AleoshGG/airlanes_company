@@ -51,7 +51,7 @@ exports.updateReservation = (req, res) => {
 exports.deleteReservation = (req, res) => {
     const id_reservation = req.params.id_reservation;
 
-    db.query("DELETE FORM reservations WHERE id_reservation = ?", id_reservation, (err, result) => {
+    db.query("DELETE FROM reservations WHERE id_reservation = ?", id_reservation, (err, result) => {
         if(err) {
             res.status(500).send("Error to delete reservation");
             console.log(err);

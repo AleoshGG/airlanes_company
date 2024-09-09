@@ -51,7 +51,7 @@ exports.deleteBankData = (req, res) => {
     const id_bank_data = req.params.id_bank_data;
     const id_user = req.params.id_user;
 
-    db.query("DELETE FORM bank_data WHERE id_bank_data = ? AND id_user = ?", [id_bank_data, id_user], (err, result) => {
+    db.query("DELETE FROM bank_data WHERE id_bank_data = ? AND id_user = ?", [id_bank_data, id_user], (err, result) => {
         if(err) {
             res.status(500).send("Error to delete bank-data");
             console.log(err);

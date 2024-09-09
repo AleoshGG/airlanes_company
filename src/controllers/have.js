@@ -64,7 +64,7 @@ exports.updateHave = (req, res) => {
 exports.deleteHave = (req, res) => {
     const id_have = req.params.id_have;
 
-    db.query("DELETE FORM have WHERE id_have = ?", id_have, (err, result) => {
+    db.query("DELETE FROM have WHERE id_have = ?", id_have, (err, result) => {
         if(err) {
             res.status(500).send("Error to delete have");
             console.log(err);
