@@ -4,6 +4,6 @@ const router = express.Router();
 const usersController = require("../controllers/users");
 
 // URLs
-router.get("/", usersController.message);
+router.post("/add", usersController.addUser);
 
 module.exports = router;
