@@ -5,5 +5,8 @@ const usersController = require("../controllers/users");
 
 // URLs
 router.post("/add", usersController.addUser);
+router.get("/", usersController.getAllUser);
+router.put("/update/:id", usersController.updateUser);
+router.delete("/delete/:id", usersController.deleteUser);
 
 module.exports = router;
