@@ -8,6 +8,7 @@ const port = process.env.PORT;
 
 // Import routes
 const usersRouter = require("./routes/users");
+const sequelize = require("./config/connection");
 
 // Cors configuration
 app.use(cors());
@@ -17,6 +18,10 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use("/users", usersRouter);
+
+
+//Sysnc
+sequelize.sync()
 
 // Start the server
 app.listen(port, () => {
