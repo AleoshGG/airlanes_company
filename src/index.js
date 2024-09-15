@@ -9,8 +9,8 @@ const sequelize = require("./config/connection");
 
 // Import routes
 const usersRouter = require("./routes/users.js");
-const bank_dataRouter = require("./routes/bank_data.js")
-
+const bank_dataRouter = require("./routes/bank_data.js");
+const ticketsRouter = require("./routes/tickets.js");
 
 // Cors configuration
 app.use(cors());
@@ -20,11 +20,11 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use("/users", usersRouter);
-app.use("/bankData/", bank_dataRouter);
-
+app.use("/bankData", bank_dataRouter);
+app.use("/tickets", ticketsRouter);
 
 //Sysnc
-sequelize.sync()
+sequelize.sync();
 
 // Start the server
 app.listen(port, () => {
