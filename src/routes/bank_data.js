@@ -1,12 +1,12 @@
 // Import dependencies
 const express = require("express");
 const router = express.Router();
-const bank_data = require("../controllers/bank_data.js");
+const bankDataController = require("../controllers/bank_data.js");
 
 // URLs
-router.post("/add", bank_data.addBankData);
-router.get("/:id", bank_data.getBankData);
-router.put("/update/:id", bank_data.updateBankData);
-router.delete("/delete/:id_bank/:id_user", bank_data.deleteBankData);
+router.post("/add", bankDataController.addBankData);
+router.get("/:id", bankDataController.getBankData);
+router.put("/update/:id/:account", bankDataController.updateBankData);
+router.delete("/delete/:id/:account", bankDataController.deleteBankData);
 
 module.exports = router;

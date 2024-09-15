@@ -1,61 +1,50 @@
 // Import dependencies
-const db = require("../config/connection.js");
+require("dotenv").config();
+const { where } = require("sequelize");
+const User = require("../models/user.js");
 
 // TODO: develop controllers
 
-//Add new user
-exports.addUser = (req, res) => {
-    const user = req.body;
-
-    db.query("INSERT INTO users SET ?", user, (err, result) => {
-        if(err) {
-            res.status(500).send("Error to insert user");
-            console.log(err);
-            return;
-        }
-        res.status(201).send("Successfully created resource");
-    });
+// Create user
+exports.addUser = async (req, res) => {
+   try {
+      const { first_name, last_name, email, password, phone_number } = req.body;
+      const newUser = await User.create({ first_name, last_name, email, password, phone_number });
+      res.status(201).send("Resource created successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Get user
-exports.getUser = (req, res) => {
-    const id_user = req.params.id;
-
-    db.query("SELECT first_name, last_name, email, phone_number FROM users WHERE id_user = ?", id_user, (err, result) => {
-        if(err) {
-            res.status(500).send("Error to get user");
-            console.log(err);
-            return;
-        }
-        res.status(200).json(result);
-    });
+// Get user
+exports.getAllUser = async (req, res) => {
+   try {
+      const users = await User.findAll();
+      res.status(200).json({users})
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Update user
-exports.updateUser = (req, res) => {
-    const user = req.body;
-    const id_user = req.params.id;
-
-    db.query("UPDATE users SET ? WHERE id_user = ?", [user, id_user], (err, result) => {
-        if(err) {
-            res.status(500).send("Error to update user");
-            console.log(err);
-            return;
-        }
-        res.status(200).send("Successful");
-    });
+// update user
+exports.updateUser = async (req, res) => {
+   try {
+      const { first_name, last_name, email, password, phone_number } = req.body;
+      const id = req.params.id;
+      const user = await User.update({ first_name, last_name, email, password, phone_number }, { where: {id_user: id}});
+      res.status(200).send("Resource updated successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Delete user
-exports.deleteUser = (req, res) => {
-    const id_user = req.params.id;
-
-    db.query("DELETE FORM users WHERE id_users = ?", id_user, (err, result) => {
-        if(err) {
-            res.status(500).send("Error to delete user");
-            console.log(err);
-            return;
-        }
-        res.status(200).send("Successful");
-    });
+// delete user
+exports.deleteUser = async (req, res) => {
+   try {
+      const id = req.params.id;
+      const user = await User.destroy({ where: {id_user: id}});
+      res.status(200).send("Resource deleted successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };

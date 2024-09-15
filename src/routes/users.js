@@ -1,12 +1,12 @@
 // Import dependencies
 const express = require("express");
 const router = express.Router();
-const users = require("../controllers/users.js");
+const usersController = require("../controllers/users.js");
 
 // URLs
-router.post("/add", users.addUser);
-router.get("/:id", users.getUser);
-router.put("/update/:id", users.updateUser);
-router.delete("/delete/:id", users.deleteUser);
+router.post("/add", usersController.addUser);
+router.get("/", usersController.getAllUser);
+router.put("/update/:id", usersController.updateUser);
+router.delete("/delete/:id", usersController.deleteUser);
 
 module.exports = router;

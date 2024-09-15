@@ -1,63 +1,53 @@
 // Import dependencies
-const db = require("../config/connection.js");
+require("dotenv").config();
+const { where } = require("sequelize");
+const Bank_Data = require("../models/bank_data.js");
 
-// TODO: develop controllers
+// TODO: Develop controllers
 
-//Add new bank-data
-exports.addBankData = (req, res) => {
-    const bank_data = req.body;
-
-    db.query("INSERT INTO bank_data SET ?", bank_data, (err, result) => {
-        if(err) {
-            res.status(500).send("Error to insert bank-data");
-            console.log(err);
-            return;
-        }
-        res.status(201).send("Successfully created resource");
-    });
+// Create bank_data
+exports.addBankData = async (req, res) => {
+   try {
+      const { account_number, expiration_date, id_user } = req.body;
+      const newBankData = await Bank_Data.create({ account_number, expiration_date, id_user });
+      res.status(201).send("Resource created successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Get bank-data
-exports.getBankData = (req, res) => {
-    const id_user = req.params.id_user;
-
-    db.query("SELECT account_number, expiration_date, id_bank_data FROM bank_data WHERE id_user = ?", id_user, (err, result) => {
-        if(err) {
-            res.status(500).send("Error to get bank-data");
-            console.log(err);
-            return;
-        }
-        res.status(200).json(result);
-    });
+// Get Bank_data
+exports.getBankData = async (req, res) => {
+   try {
+      const id = req.params.id;
+      const bank_data = await bank_data.findAll({where: {id_user: id}});
+      res.status(200).json({bank_data})
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Update bank_data
-exports.updateBankData = (req, res) => {
-    const bank_data = req.body;
-    const id_bank_data = req.params.id_bank_data;
-
-    db.query("UPDATE bank_data SET ? WHERE id_bank_data = ?", [bank_data, id_bank_data], (err, result) => {
-        if(err) {
-            res.status(500).send("Error to update bank-data");
-            console.log(err);
-            return;
-        }
-        res.status(200).send("Successful");
-    });
+// update bank_data
+exports.updateBankData = async (req, res) => {
+   try {
+      const { account_number, expiration_date, id_user } = req.body;
+      const id = req.params.id;
+      const account = req.params.account;
+      const bank_data = await Bank_Data.update({ account_number, expiration_date, id_user }, { where: {id_user: id, account_number: account}});
+      res.status(200).send("Resource updated successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Delete bank_data
-exports.deleteBankData = (req, res) => {
-    const id_bank_data = req.params.id_bank_data;
-    const id_user = req.params.id_user;
-
-    db.query("DELETE FORM bank_data WHERE id_bank_data = ? AND id_user = ?", [id_bank_data, id_user], (err, result) => {
-        if(err) {
-            res.status(500).send("Error to delete bank-data");
-            console.log(err);
-            return;
-        }
-        res.status(200).send("Successful");
-    });
+// delete bank_data
+exports.deleteBankData = async (req, res) => {
+   try {
+      const id = req.params.id;
+      const account = req.params. account;
+      const bank_data = await Bank_Data.destroy({ where: {id_user: id, account_number: account}});
+      res.status(200).send("Resource deleted successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
-
