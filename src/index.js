@@ -7,13 +7,15 @@ const app = express();
 const port = process.env.PORT;
 
 // Import routes
-const paymentsRouter = require("./routes/payments");
-const placesRouter = require("./routes/places");
-const planesRouter = require("./routes/planes");
+//const paymentsRouter = require("./routes/payments");
+//const placesRouter = require("./routes/places");
+//const planesRouter = require("./routes/planes");
 const reservationsRouter = require("./routes/reservations.js");
 const haveRouter = require("./routes/have.js");
 const usersRouter = require("./routes/users.js");
 const bank_data = require("./routes/bank_data.js");
+const passengers = require("./routes/passengers.js")
+const flights = require("./routes/flights.js")
 
 // Cors configuration
 app.use(cors());
@@ -23,12 +25,14 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use("/users", usersRouter);
-app.use("/payments", paymentsRouter);
-app.use("/places", placesRouter);
-app.use("/planes", planesRouter);
+//app.use("/payments", paymentsRouter);
+//app.use("/places", placesRouter);
+//app.use("/planes", planesRouter);
 app.use("/reservations", reservationsRouter);
 app.use("/have", haveRouter);
 app.use("/bank_data", bank_data);
+app.use("/passengers", passengers);
+app.use("flights", flights);
 
 // Start the server
 app.listen(port, () => {
