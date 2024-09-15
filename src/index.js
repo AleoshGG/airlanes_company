@@ -11,6 +11,7 @@ const sequelize = require("./config/connection");
 const usersRouter = require("./routes/users.js");
 const bank_dataRouter = require("./routes/bank_data.js");
 const ticketsRouter = require("./routes/tickets.js");
+const reservationsRouter = require("./routes/reservations.js");
 
 // Cors configuration
 app.use(cors());
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use("/users", usersRouter);
 app.use("/bankData", bank_dataRouter);
 app.use("/tickets", ticketsRouter);
+app.use("/reservations", reservationsRouter);
 
 //Sysnc
 sequelize.sync();

@@ -1,40 +1,48 @@
 // Import dependencies
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/connection.js");
-const Planes = require("../models/planes.js");
-const Flights = require("../models/flights.js");
+const User = require("./user.js");
+const Flight = require("../models/flight.js");
 
 // Define table
-const Tickets = sequelize.define(
-  "Tickets",
+const Reservations = sequelize.define(
+  "Reservations",
   {
-    id_ticket: {
+    id_reservation: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    id_planes: {
-      type: DataTypes.INTEGER,
+    status: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    id_user: {
+      type: DataTypes.DATE,
       allowNull: false,
       references: {
-        model: "planes",
-        key: "id_planes",
+        model: "user",
+        key: "id_user",
       },
     },
     id_flight: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "flights",
+        model: "flight",
         key: "id_flight",
       },
     },
   },
   {
-    tableName: "Tickets",
+    tableName: "reservations",
     timestamps: false,
   }
 );
 
-module.exports = Tickets;
+module.exports = Reservations;
