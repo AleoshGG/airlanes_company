@@ -1,7 +1,7 @@
 // Import dependencies
 const express = require("express");
 const router = express.Router();
-const usersController = require("../controllers/users");
+const usersController = require("../controllers/users.js");
 
 // URLs
 router.post("/add", usersController.addUser);
