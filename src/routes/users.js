@@ -5,7 +5,6 @@ const users = require("../controllers/users.js");
 
 // URLs
 router.post("/add", users.addUser);
-router.get("/:id", users.getUser);
 router.put("/update/:id", users.updateUser);
 router.delete("/delete/:id", users.deleteUser);
 

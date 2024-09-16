@@ -1,14 +1,16 @@
-// Import dependencies
-require("dotenv").config;
+require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
 // Initialize connection parameters
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-});
+const sequelize = new Sequelize(
+  "root",
+  "limberg1423",
+  "ORMSAPIEJercicio",
+  {
+    host: "127.0.0.1",
+    dialect: "mysql",
+  }
+);
 
 // Start connection
 sequelize
