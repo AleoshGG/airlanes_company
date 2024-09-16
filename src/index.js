@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT;
+const sequelize = require("./config/connection.js");
 
 // Import routes
 const paymentsRouter = require("./routes/payments");

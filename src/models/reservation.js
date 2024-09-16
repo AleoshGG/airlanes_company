@@ -2,7 +2,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/connection.js");
 const User = require("./user.js");
-const Flight = require("../models/flight.js");
+const Flight = require("../models/flights.js");
 
 // Define table
 const Reservations = sequelize.define(
