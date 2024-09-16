@@ -1,5 +1,3 @@
-// Import dependencies
-require("dotenv").config;
 const { Sequelize } = require("sequelize");
 
 // Initialize connection parameters
