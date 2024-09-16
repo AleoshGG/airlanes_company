@@ -9,6 +9,8 @@ const port = process.env.PORT;
 // Import routes
 const usersRouter = require("./routes/users");
 const sequelize = require("./config/connection");
+const passergersRouter = require("./routes/passengers")
+const flightsRouter = require("./routes/flights")
 
 // Cors configuration
 app.use(cors());
@@ -18,6 +20,8 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use("/users", usersRouter);
+app.use("/passengers", passergersRouter);
+app.use("/flights", flightsRouter)
 
 
 
