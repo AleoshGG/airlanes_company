@@ -24,7 +24,7 @@ const Payment = sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "Reservation", // Nombre del modelo referenciado
+          model: "reservations", // Nombre del modelo referenciado
           key: "id_reservation",
         },
       },

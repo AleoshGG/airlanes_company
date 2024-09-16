@@ -1,8 +1,6 @@
 // Import dependencies
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/connection.js");
-const User = require("./user.js");
-const Flight = require("../models/flights.js");
 
 // Define table
 const Reservations = sequelize.define(
@@ -23,10 +21,10 @@ const Reservations = sequelize.define(
       allowNull: false,
     },
     id_user: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "user",
+        model: "users",
         key: "id_user",
       },
     },
@@ -34,7 +32,7 @@ const Reservations = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "flight",
+        model: "flights",
         key: "id_flight",
       },
     },

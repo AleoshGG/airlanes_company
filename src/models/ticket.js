@@ -26,7 +26,7 @@ const Tickets = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "flight",
+        model: "flights",
         key: "id_flight",
       },
     },
