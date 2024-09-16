@@ -3,7 +3,6 @@ require("dotenv").config();
 const { where } = require("sequelize");
 const Bank_Data = require("../models/bank_data.js");
 
-// TODO: Develop controllers
 
 // Create bank_data
 exports.addBankData = async (req, res) => {

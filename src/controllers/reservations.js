@@ -1,4 +1,3 @@
-// Import dependencies
 require("dotenv").config();
 const { where } = require("sequelize");
 const reservation = require("../models/reservation.js");
@@ -49,3 +48,4 @@ exports.deleteReservation = async (req, res) => {
       return res.status(500).send(`Error has occurred: ${err}`);
    }
 };
+
