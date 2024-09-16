@@ -5,12 +5,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT;
-const sequelize = require("./config/connection");
 
 // Import routes
-const usersRouter = require("./routes/users.js");
-const bank_dataRouter = require("./routes/bank_data.js")
-
+const usersRouter = require("./routes/users");
+const paymentsRouter = require("./routes/payments");
+const placesRouter = require("./routes/places");
+const planesRouter = require("./routes/planes")
+const sequelize = require("./config/connection");
 
 // Cors configuration
 app.use(cors());
@@ -20,7 +21,9 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use("/users", usersRouter);
-app.use("/bankData/", bank_dataRouter);
+app.use("/payments", paymentsRouter);
+app.use("/places", placesRouter);
+app.use("/planes", planesRouter);
 
 
 //Sysnc
