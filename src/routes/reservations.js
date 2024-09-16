@@ -5,7 +5,7 @@ const reservationsController = require("../controllers/reservations.js");
 
 // URLs
 router.post("/add", reservationsController.addReservation);
-router.get("/:id_user/:status", reservationsController.getReservation);
+router.get("/:id", reservationsController.getAll);
 router.put("/update/:id", reservationsController.updateReservation);
 router.delete("/delete/:id", reservationsController.deleteReservation);
 

@@ -1,63 +1,51 @@
-// Import dependencies
-const db = require("../config/connection.js");
+require("dotenv").config();
+const { where } = require("sequelize");
+const reservation = require("../models/reservation.js");
 
-// TODO: develop controllers
+// TODO: Develop controllers
 
-//Add new reservation
-exports.addReservation = (req, res) => {
-    const reservation = req.body;
-
-    db.query("INSERT INTO reservation SET ?", reservation, (err, result) => {
-        if(err) {
-            res.status(500).send("Error to insert reservation");
-            console.log(err);
-            return;
-        }
-        res.status(201).send("Successfully created resource");
-    });
+// Create reservation
+exports.addReservation = async (req, res) => {
+   try {
+      const { status, date, id_user, id_flight } = req.body;
+      const newReservation= await reservation.create({ status, date, id_user, id_flight });
+      res.status(201).send("Resource created successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Get all reservations
-exports.getReservation = (req, res) => {
-    const id_user = req.params.id_user;
-    const status = req.params.status;
-
-    db.query("SELECT id_reservation, date, status, date, id_fligth FROM reservations WHERE id_user = ? AND status = ?", [id_user, status], (err, result) => {
-        if(err) {
-            res.status(500).send("Error to get all reservations");
-            console.log(err);
-            return;
-        }
-        res.status(200).json(result);
-    });
+// Get reservations
+exports.getAll = async (req, res) => {
+   try {
+      const id_user = req.params.id;  
+      const  reservations = await reservation.findAll({ where: {id_user: id_user}});
+      res.status(200).json({reservations})
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Update reservations
-exports.updateReservation = (req, res) => {
-    const reservation = req.body;
-    const id_reservation = req.params.id_reservation;
-
-    db.query("UPDATE reservations SET ? WHERE id_reservation = ?", [reservation, id_reservation], (err, result) => {
-        if(err) {
-            res.status(500).send("Error to update reservation");
-            console.log(err);
-            return;
-        }
-        res.status(200).send("Successful");
-    });
+// update reservation
+exports.updateReservation = async (req, res) => {
+   try {
+      const { status, date, id_user, id_flight } = req.body;
+      const id = req.params.id;
+      const reservation = await reservation.update({ status, date, id_user, id_flight }, { where: {id_reservation: id}});
+      res.status(200).send("Resource updated successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
-//Delete reservation
-exports.deleteReservation = (req, res) => {
-    const id_reservation = req.params.id_reservation;
-
-    db.query("DELETE FORM reservations WHERE id_reservation = ?", id_reservation, (err, result) => {
-        if(err) {
-            res.status(500).send("Error to delete reservation");
-            console.log(err);
-            return;
-        }
-        res.status(200).send("Successful");
-    });
+// delete reservation
+exports.deleteReservation = async (req, res) => {
+   try {
+      const id = req.params.id;
+      const reservation = await reservation.destroy({ where: {id_reservation: id}});
+      res.status(200).send("Resource deleted successfully");
+   } catch (err) {
+      return res.status(500).send(`Error has occurred: ${err}`);
+   }
 };
 
