@@ -9,8 +9,8 @@ const Flights = sequelize.define(
     id_flight: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true, 
-      autoIncrement: true, 
+      primaryKey: true,
+      autoIncrement: true,
     },
     date: {
       type: DataTypes.DATE,
@@ -23,10 +23,18 @@ const Flights = sequelize.define(
     origin: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "places",
+        key: "id_place",
+      },
     },
     destination: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "places",
+        key: "id_place",
+      },
     },
   },
   {

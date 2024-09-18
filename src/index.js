@@ -31,9 +31,6 @@ app.use("/bankData", bank_dataRouter);
 app.use("/tickets", ticketsRouter);
 app.use("/reservations", reservationsRouter);
 
-//Sysnc EJECUTARLO SOLO UNA VEZ
-//sequelize.sync();
-
 // Start the server
 app.listen(port, () => {
   console.log(`Express server running in http://localhost:${port}`);

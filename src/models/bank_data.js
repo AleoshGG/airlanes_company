@@ -20,21 +20,16 @@ const Bank_Data = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      references: {
+        model: "users",
+        key: "id_user",
+      },
     },
   },
   {
     tableName: "bank_data",
     timestamps: false,
-    indexes: [
-      {
-        unique: true,
-        fields: ["account_number", "id_user"],
-      },
-    ],
   }
 );
-
-User.hasMany(Bank_Data, { foreignKey: "id_user" });
-Bank_Data.belongsTo(User, { foreignKey: "id_user" });
 
 module.exports = Bank_Data;

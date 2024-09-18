@@ -3,21 +3,21 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/connection.js");
 
 // Define table
-const Tickets = sequelize.define(
-  "Tickets",
+const Assignments = sequelize.define(
+  "Assignments",
   {
-    id_ticket: {
+    id_assignment: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    id_passenger: {
+    id_planes: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "passengers",
-        key: "id_passenger",
+        model: "planes",
+        key: "id_planes",
       },
     },
     id_flight: {
@@ -30,9 +30,9 @@ const Tickets = sequelize.define(
     },
   },
   {
-    tableName: "tickets",
+    tableName: "assignments",
     timestamps: false,
   }
 );
 
-module.exports = Tickets;
+module.exports = Assignments;
